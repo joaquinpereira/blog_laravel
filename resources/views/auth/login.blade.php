@@ -38,21 +38,21 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
-      <div class="form-group @error('email') is-invalid @enderror has-feedback">
+      <div class="form-group @error('email') has-error @enderror has-feedback">
         <input type="email" class="form-control" placeholder="Email" name="email" 
             value="{{ old('email') }}" required autocomplete="email" autofocus>
         @error('email')
-            <span class="invalid-feedback" role="alert">
+            <span class="help-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-      <div class="form-group @error('password') is-invalid @enderror has-feedback">
+      <div class="form-group @error('password') has-error @enderror has-feedback">
         <input type="password" class="form-control" placeholder="Contraseña" 
             name="password" required autocomplete="current-password">
         @error('password')
-            <span class="invalid-feedback" role="alert">
+            <span class="help-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror

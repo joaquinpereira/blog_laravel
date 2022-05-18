@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\User;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Post;
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        User::factory(1)->create();
         Tag::factory(10)->create();
         Category::factory(10)->create();
         Post::factory(30)->create()
