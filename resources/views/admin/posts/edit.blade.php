@@ -44,13 +44,19 @@
                             <input name="title" placeholder="Ingresa aqui el título de la publicación" 
                             type="text" class="form-control" value="{{ old('title', $post->title) }}">
                             {!! $errors->first('title','<span class="help-block">:message</span>') !!}
-                        </div>                         
+                        </div>
                         <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
                             <label>Contenido de la publicación</label>
                             <textarea name="body" id="editor" class="form-control" rows="10" 
                             placeholder="Ingresa el contenido completo de la publicación">{{ old('body', $post->body) }}</textarea>
                             {!! $errors->first('body','<span class="help-block">:message</span>') !!}
-                        </div>                        
+                        </div>
+                        <div class="form-group {{ $errors->has('iframe') ? 'has-error' : '' }}">
+                            <label>Contenido embebido (iframe)</label>
+                            <textarea name="iframe" class="form-control" rows="2" 
+                            placeholder="Ingresa contenido embebido (iframe) de audio o vídeo">{{ old('iframe', $post->iframe) }}</textarea>
+                            {!! $errors->first('iframe','<span class="help-block">:message</span>') !!}
+                        </div>
                     </div>      
                 </div>
             </div>
