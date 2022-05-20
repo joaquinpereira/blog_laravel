@@ -13,6 +13,26 @@
 
 @section('content')
     <div class="row">
+        @if ($post->photos->count())
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="row">
+                        @foreach ($post->photos as $photo)
+                            <form method="POST" action="{{ route('admin.photos.destroy', $photo) }}">
+                                @csrf
+                                {{ method_field('DELETE') }}
+                                <div class="col-md-2">
+                                    <button class="btn btn-danger btn-xs" style="position:absolute">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                    <img src="{{ url($photo->url) }}" class="img-responsive">
+                                </div>
+                            </form>                                
+                        @endforeach
+                    </div>
+                </div>
+            </div>            
+        @endif
         <form method="POST" action="{{ route('admin.posts.update',$post) }}">
             @method('PUT')
             @csrf
@@ -30,7 +50,7 @@
                             <textarea name="body" id="editor" class="form-control" rows="10" 
                             placeholder="Ingresa el contenido completo de la publicación">{{ old('body', $post->body) }}</textarea>
                             {!! $errors->first('body','<span class="help-block">:message</span>') !!}
-                        </div>
+                        </div>                        
                     </div>      
                 </div>
             </div>
@@ -75,6 +95,9 @@
                             <textarea name="excerpt" id="excerpt" class="form-control" 
                             placeholder="Ingresa un extracto de la publicación">{{ old('excerpt', $post->excerpt) }}</textarea>
                             {!! $errors->first('excerpt','<span class="help-block">:message</span>') !!}
+                        </div>
+                        <div class="form-group">
+                            <div class="dropzone"></div>
                         </div> 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Guardar Publicación</button>
@@ -86,6 +109,8 @@
     </div>
 
     @push('styles')
+        <!-- dropzone Handles drag and drop of files for you. -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.2/dropzone.css">
         <!-- bootstrap datepicker -->
         <link rel="stylesheet" href="/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 
@@ -95,6 +120,8 @@
     @endpush
     
     @push('scripts')
+        <!-- dropzone Handles drag and drop of files for you. -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.2/dropzone-min.js"></script>
         <!-- bootstrap datepicker -->
         <script src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
         <!-- CK Editor -->
@@ -105,11 +132,33 @@
         <script type="text/javascript">
             //Initialize Select2 Elements
             $('.select2').select2();
+
             //Date picker
             $('#datepicker').datepicker({
                 autoclose: true
             });
+
             CKEDITOR.replace('editor')
+            CKEDITOR.config.height = 315;
+
+            var myDropzone = new Dropzone('.dropzone', {
+                url: '/admin/posts/{{ $post->url }}/photos',
+                acceptedFiles: 'image/*',
+                maxFilesize: 2,
+                //maxFiles: 1,
+                paramName: 'photo',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                dictDefaultMessage: 'Arrastras las fotos aquí para subirlas'
+            });
+
+            myDropzone.on('error', function(file, res){
+                var msg = res.errors.photo[0];
+                $('.dz-error-message:last > span').text(msg);
+            });
+
+            Dropzone.autoDiscover = false;
         </script>
     @endpush
    

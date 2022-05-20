@@ -15,7 +15,7 @@ class Post extends Model
     protected $dates = ['published_at'];
 
     public function getRouteKeyName(){
-        return 'title';
+        return 'url';
     }
     
     public function category(){
@@ -24,6 +24,10 @@ class Post extends Model
 
     public function tags(){
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function photos(){
+        return $this->hasMany(Photo::class);
     }
 
     public function scopePublished($query){

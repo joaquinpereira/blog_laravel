@@ -12,7 +12,7 @@
                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                         {{-- <label>Título de la publicación</label> --}}
                         <input name="title" placeholder="Ingresa aqui el título de la publicación" 
-                        type="text" class="form-control" value="{{ old('title') }}">
+                        type="text" class="form-control" value="{{ old('title') }}" required>
                         {!! $errors->first('title','<span class="help-block">:message</span>') !!}
                     </div>  
                 </div>
