@@ -27,7 +27,7 @@ class PostFormRequest extends FormRequest
             //'title' => 'required|unique:posts,title',
             'title' => 'required',
             'body' => 'required',
-            'category' => 'required',
+            'category_id' => 'required',
             'excerpt' => 'required',
             'tags' => 'required'
         ];

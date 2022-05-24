@@ -73,16 +73,16 @@
                                 id="datepicker" value="{{ old('published_at', $post->published_at ? $post->published_at->format('m/d/Y') : null )  }}">
                             </div>                           
                         </div>
-                        <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
+                        <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
                             <label>Categoría</label>
-                            <select name="category" id="category" class="form-control">
+                            <select name="category_id" id="category_id" class="form-control select2" >
                                 <option value="">Selecciona una categoría</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ $category->id == old('category',$post->category_id) ? 'selected':''}}>
+                                @foreach ($categories as $category_id)
+                                    <option value="{{ $category->id }}" {{ $category->id == old('category_id',$post->category_id) ? 'selected':''}}>
                                         {{ $category->name }}</option>                                    
                                 @endforeach
                             </select>
-                            {!! $errors->first('category','<span class="help-block">:message</span>') !!}
+                            {!! $errors->first('category_id','<span class="help-block">:message</span>') !!}
                         </div>
                         <div class="form-group {{ $errors->has('tags') ? 'has-error' : '' }}">
                             <label>Multiple</label>
@@ -137,7 +137,9 @@
 
         <script type="text/javascript">
             //Initialize Select2 Elements
-            $('.select2').select2();
+            $('.select2').select2({
+                tags: true
+            });
 
             //Date picker
             $('#datepicker').datepicker({

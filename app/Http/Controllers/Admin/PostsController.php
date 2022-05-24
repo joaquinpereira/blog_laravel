@@ -29,7 +29,6 @@ class PostsController extends Controller
         
         $post = Post::create([
             'title' => $request->title,
-            'url' => Str::slug($request->title,'_'),
         ]);
  
         return redirect()->route('admin.posts.edit', $post);
@@ -43,16 +42,9 @@ class PostsController extends Controller
 
     public function update(Post $post, PostFormRequest $request){
 
-        $post->title = $request->title;
-        $post->url = Str::slug($request->title,'_');
-        $post->body = $request->body;
-        $post->iframe = $request->iframe;
-        $post->excerpt = $request->excerpt;
-        $post->published_at = $request->published_at;
-        $post->category_id = $request->category;
-        $post->save();
-        
-        $post->tags()->sync($request->tags);
+        $post->update($request->all());
+
+        $post->syncTags($request->tags);
 
         return redirect()->route('admin.posts.edit', $post)->with('flash','Tu publicación ha sido actualizada');
     }
