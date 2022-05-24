@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class PostFactory extends Factory
 {
@@ -17,6 +18,7 @@ class PostFactory extends Factory
         $title = $this->faker->sentence(6 , true);
         return [
             'title' => $title,
+            'url' => Str::slug($title),
             'excerpt' => $this->faker->sentence(20 , true),
             'body' => $this->faker->paragraph(30 , true),
             'published_at' => Carbon::now()->subDays($this->faker->numberBetween($min = 1, $max = 10)),

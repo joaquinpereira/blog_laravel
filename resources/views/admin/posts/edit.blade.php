@@ -25,7 +25,7 @@
                                     <button class="btn btn-danger btn-xs" style="position:absolute">
                                         <i class="fa fa-remove"></i>
                                     </button>
-                                    <img src="{{ url($photo->url) }}" class="img-responsive">
+                                    <img src="{{ Storage::url($photo->url) }}" class="img-responsive">
                                 </div>
                             </form>                                
                         @endforeach
@@ -77,7 +77,7 @@
                             <label>Categoría</label>
                             <select name="category_id" id="category_id" class="form-control select2" >
                                 <option value="">Selecciona una categoría</option>
-                                @foreach ($categories as $category_id)
+                                @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" {{ $category->id == old('category_id',$post->category_id) ? 'selected':''}}>
                                         {{ $category->name }}</option>                                    
                                 @endforeach

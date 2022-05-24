@@ -8,17 +8,17 @@
         @foreach ($posts as $post)
             <article class="post">
                 @if($post->photos->count() === 1)
-                    <figure><img src="{{ $post->photos->first()->url }}" class="img-responsive"></figure>
+                    <figure><img src="{{ Storage::url($post->photos->first()->url) }}" class="img-responsive"></figure>
                 @elseif($post->photos->count() > 1)
                     <div class="gallery-photos" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 464}'>
                         @foreach ($post->photos as $photo)
                             <figure class="grid-item grid-item--height2 gallery-image-item">                                
                                 @if($loop->iteration ===4)                                
                                     <div class="overlay">{{ $post->photos->count() }} Fotos</div> 
-                                    <img  src="{{ url($photo->url) }}" class="img-responsive">
+                                    <img  src="{{ Storage::url($photo->url) }}" class="img-responsive">
                                     @break
                                 @else
-                                    <img  src="{{ url($photo->url) }}" class="img-responsive">
+                                    <img  src="{{ Storage::url($photo->url) }}" class="img-responsive">
                                 @endif                                
                             </figure>    
                         @endforeach                

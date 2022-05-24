@@ -15,6 +15,15 @@ class Post extends Model
 
     protected $dates = ['published_at'];
 
+    public static function boot(){
+        parent::boot();
+
+        static::deleting(function ($post){
+            $post->tags()->detach();
+            $post->photos->each->delete();
+        });
+    }
+
     public function getRouteKeyName(){
         return 'url';
     }
@@ -37,9 +46,24 @@ class Post extends Model
         ->orderBy('published_at', 'desc');
     }
 
-    public function setTitleAttribute($title){
-        $this->attributes['title'] = $title;
-        $this->attributes['url'] = Str::slug($title);
+    public static function create(array $attributes = []){
+        $post = static::query()->create($attributes);
+
+        $post->generateUrl();
+
+        return $post;
+    }
+
+    public function generateUrl(){
+        $url = Str::slug($this->title);
+
+        if(static::where('url',$url)->exists()){
+            $url = "{$url}-{$this->id}"; 
+        }
+
+        $this->url = $url;
+
+        $this->save();
     }
 
     public function setPublishedAtAttribute($published_at){

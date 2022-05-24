@@ -25,7 +25,7 @@ class PostsController extends Controller
 
     public function store(Request $request){
 
-        $this->validate($request, ['title' => 'required|unique:posts,title']);
+        $this->validate($request, ['title' => 'required|min:3']);
         
         $post = Post::create([
             'title' => $request->title,
@@ -46,7 +46,14 @@ class PostsController extends Controller
 
         $post->syncTags($request->tags);
 
-        return redirect()->route('admin.posts.edit', $post)->with('flash','Tu publicación ha sido actualizada');
+        return redirect()->route('admin.posts.edit', $post)->with('flash','La publicación ha sido actualizada');
+    }
+
+    public function destroy(Post $post){
+        
+        $post->delete();
+
+        return redirect()->route('admin.posts.index', $post)->with('flash','La publicación ha sido eliminada');
     }
 
 }
