@@ -20,7 +20,9 @@
             <span class="c-gris">{{ $post->published_at->format('M d') }}</span>
             </div>
             <div class="post-category">
-            <span class="category">{{ $post->category->name }}</span>
+                <span class="category text-capitalize">
+                    <a href="{{ route('categories.show', $post->category) }}">{{ $post->category->name }}</a>
+                </span>
             </div>
         </header>
         <h1>{{ $post->title }}</h1>
@@ -33,7 +35,9 @@
             @include('partials.social-links',['description' => $post->title])
             <div class="tags container-flex">
                 @foreach ($post->tags as $tag)
-                    <span class="tag c-gris">#{{ $tag->name }}</span>    
+                    <span class="tag c-gray-1 text-capitalize">
+                        <a href="{{ route('tags.show',$tag) }}">#{{ $tag->name }}</a>
+                    </span>    
                 @endforeach
             </div>
         </footer>

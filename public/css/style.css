@@ -46,6 +46,7 @@ header nav li a:hover{
 .post .category a{
 	color: inherit;
 	font-size: inherit;
+	font-weight: inherit;
 }
 .post figure{
 	margin:0;
@@ -70,8 +71,9 @@ header nav li a:hover{
 	margin: 0 5px;
 }
 .post .tag a{
-	color: #909090;
+	color: #bdbdbd;
 	font-size: inherit;
+	font-weight: inherit;
 }
 .post footer{
 	margin-top: 45px;
