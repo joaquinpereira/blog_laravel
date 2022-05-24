@@ -2,7 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@home')->name('pages.home');
+Route::get('nosotros', 'PagesController@about')->name('pages.about');
+Route::get('archivo', 'PagesController@archive')->name('pages.archive');
+Route::get('contacto', 'PagesController@contact')->name('pages.contact');
+
+
 Route::get('blog/{post}', 'PostsController@show')->name('posts.show');
 Route::get('categories/{category}', 'CategoriesController@show')->name('categories.show');
 Route::get('tags/{tag}', 'TagsController@show')->name('tags.show');
@@ -15,7 +20,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('posts/{post}', 'PostsController@edit')->name('admin.posts.edit');
     Route::put('posts/{post}', 'PostsController@update')->name('admin.posts.update');
     Route::delete('posts/{post}', 'PostsController@destroy')->name('admin.posts.destroy');
-    
+
     Route::post('posts/{post}/photos', 'PhotosController@store')->name('admin.posts.photos.store');
     Route::delete('photos/{photo}', 'PhotosController@destroy')->name('admin.photos.destroy');
 });
