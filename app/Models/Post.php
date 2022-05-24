@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+use function PHPUnit\Framework\isNull;
+
 class Post extends Model
 {
     use HasFactory;
@@ -81,5 +83,9 @@ class Post extends Model
         });
               
         return $this->tags()->sync($tagIds);
+    }
+
+    public function isPublished(){
+        return ! isNull($this->published_at) && $this->published_at < today();
     }
 }
