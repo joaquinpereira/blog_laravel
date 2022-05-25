@@ -23,6 +23,7 @@ class PostFactory extends Factory
             'body' => $this->faker->paragraph(30 , true),
             'published_at' => Carbon::now()->subDays($this->faker->numberBetween($min = 1, $max = 10)),
             'category_id' => $this->faker->numberBetween($min = 1, $max = 10),
+            'user_id' => 1,
         ];
     }
 }

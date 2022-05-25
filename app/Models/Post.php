@@ -13,7 +13,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','excerpt','body','published_at','category_id'];
+    protected $fillable = ['title','excerpt','body','published_at','category_id','user_id'];
 
     protected $dates = ['published_at'];
 
@@ -40,6 +40,10 @@ class Post extends Model
 
     public function photos(){
         return $this->hasMany(Photo::class);
+    }
+
+    public function owner(){
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function scopePublished($query){
@@ -86,6 +90,6 @@ class Post extends Model
     }
 
     public function isPublished(){
-        return ! isNull($this->published_at) && $this->published_at < today();
+        return $this->published_at && $this->published_at < today();
     }
 }

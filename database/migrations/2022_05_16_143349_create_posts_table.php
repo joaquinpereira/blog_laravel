@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->mediumText('iframe')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->foreignId('category_id')->nullable()->constrained()->references('id')->on('categories');
+            $table->foreignId('user_id')->constrained()->references('id')->on('users');
             $table->timestamps();
         });
     }
