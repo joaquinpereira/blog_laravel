@@ -92,4 +92,18 @@ class Post extends Model
     public function isPublished(){
         return $this->published_at && $this->published_at < today();
     }
+
+    public function viewType($home = null){
+
+        if($this->photos->count() === 1):
+            return 'posts.photo';
+        elseif($this->photos->count() > 1):
+            return $home == 'home' ? 'posts.carousel-preview' : 'posts.carousel';
+        elseif ($this->iframe):
+            return 'posts.iframe';
+        else:
+            return 'posts.text';
+        endif;
+
+    }
 }
