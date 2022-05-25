@@ -19,7 +19,15 @@ class DatabaseSeeder extends Seeder
     {
         Storage::disk('public')->deleteDirectory('posts');
 
-        User::factory(1)->create();
+        User::factory(1)->create([
+            'name' => 'Joaquin Pereira',
+            'email' => 'pereira.joaquin@gmail.com',
+        ]);
+        User::factory(1)->create([
+            'name' => 'Jhon Smith',
+            'email' => 'jhon@gmail.com',
+        ]);
+        
         Tag::factory(10)->create();
         Category::factory(10)->create();
 

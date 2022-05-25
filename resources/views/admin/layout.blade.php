@@ -182,7 +182,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">{{ auth()->user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -190,11 +190,12 @@ desired effect
                 <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{ auth()->user()->name }}
+                  <small>Desde {{ auth()->user()->created_at->format('d/M/Y') }}</small>
                 </p>
               </li>
               <!-- Menu Body -->
+              {{-- 
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
@@ -207,19 +208,26 @@ desired effect
                     <a href="#">Friends</a>
                   </div>
                 </div>
+               --}}
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <button type="submit" class="btn btn-default btn-flat btn-block">Cerrar sesión</button>
+                </form> 
+                {{-- 
                 <div class="pull-left">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" href="{{ route('logout') }}" class="btn btn-default btn-flat">Sign out</button>
+                    <button type="submit" class="btn btn-default btn-flat">Cerrar sesión</button>
                   </form>                  
                 </div>
+                 --}}                
               </li>
             </ul>
           </li>
