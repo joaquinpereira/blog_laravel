@@ -52,6 +52,15 @@ class Post extends Model
         ->orderBy('published_at', 'desc');
     }
 
+    public function scopeAllowed($query){
+        
+        if(auth()->user()->hasRole('Admin')){
+            return $query;
+        }
+
+        return $query->where('user_id', auth()->id());
+    }
+
     public static function create(array $attributes = []){
 
         $attributes['user_id'] = auth()->id();

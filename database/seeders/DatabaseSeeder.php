@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Post;
+use Spatie\Permission\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,14 +20,20 @@ class DatabaseSeeder extends Seeder
     {
         Storage::disk('public')->deleteDirectory('posts');
 
-        User::factory(1)->create([
+        $adminRol = Role::create(['name' => 'Admin']);
+        $writerRol = Role::create(['name' => 'Writer']);
+
+        $user = User::factory(1)->create([
             'name' => 'Joaquin Pereira',
             'email' => 'pereira.joaquin@gmail.com',
-        ]);
-        User::factory(1)->create([
+        ])->first();
+        $user->assignRole($adminRol);
+
+        $user = User::factory(1)->create([
             'name' => 'Jhon Smith',
             'email' => 'jhon@gmail.com',
-        ]);
+        ])->first();
+        $user->assignRole($writerRol);
         
         Tag::factory(10)->create();
         Category::factory(10)->create();
