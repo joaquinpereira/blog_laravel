@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('email', function(){
+    return new App\Mail\LoginCredentials(App\Models\User::first(), 'asd465as');
+});
+
 Route::get('/', 'PagesController@home')->name('pages.home');
 Route::get('nosotros', 'PagesController@about')->name('pages.about');
 Route::get('archivo', 'PagesController@archive')->name('pages.archive');

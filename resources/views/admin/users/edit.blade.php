@@ -58,18 +58,10 @@
                 </div>
                 <div class="box-body">
                     <form action="{{ route('admin.users.roles.update', $user) }}" method="post">
-                        @csrf
-                        @method('PUT')
-                        @foreach ($roles as $role)
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="roles[]" value="{{ $role->name }}" 
-                                        {{ $user->roles->contains($role->id) ? 'checked' : '' }}>
-                                    {{ $role->name }} <br>
-                                    <small class="text-muted">{{ $role->permissions->pluck('name')->implode(', ') }}</small>
-                                </label>
-                            </div>
-                        @endforeach
+                        @csrf @method('PUT')
+
+                        @include('admin.partials.roles')
+
                         <button class="btn btn-primary btn-block">Actualizar roles</button>
                     </form>                    
                 </div>
@@ -80,17 +72,10 @@
                 </div>
                 <div class="box-body">
                     <form action="{{ route('admin.users.permissions.update', $user) }}" method="post">
-                        @csrf
-                        @method('PUT')
-                        @foreach ($permissions as $id => $name)
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="permissions[]" value="{{ $name }}" 
-                                        {{ $user->permissions->contains($id) ? 'checked' : '' }}>
-                                    {{ $name }}
-                                </label>
-                            </div>
-                        @endforeach
+                        @csrf @method('PUT')
+
+                        @include('admin.partials.permissions')   
+
                         <button class="btn btn-primary btn-block">Actualizar permisos</button>
                     </form>                    
                 </div>
