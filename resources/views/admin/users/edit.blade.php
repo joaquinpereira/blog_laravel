@@ -23,11 +23,27 @@
 
                         <div class="form-group">
                             <label for="name">Nombre:</label>
-                            <input name="name" value="{{ old('name', $user->name) }}" type="text" class="form-control">
+                            <input name="name" value="{{ old('name', $user->name) }}" type="text" class="form-control"
+                                placeholder="Ingrese el nombre">
                         </div>
+
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input name="email" value="{{ old('email', $user->email) }}" type="text" class="form-control">
+                            <input name="email" value="{{ old('email', $user->email) }}" type="text" class="form-control"
+                                placeholder="Ingrese el email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input name="password" type="password" class="form-control" placeholder="Ingrese la contraseña">
+                            <small class="text-muted">Dejar en blanco si no quieres cambiar la contraseña</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirmar contraseña:</label>
+                            <input name="password_confirmation" type="password" class="form-control" 
+                                placeholder="Repite la contraseña">
+
                         </div>
 
                         <button class="btn btn-primary btn-block">Actualizar usuario</button>
