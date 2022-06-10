@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Post;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,6 +23,11 @@ class DatabaseSeeder extends Seeder
 
         $adminRol = Role::create(['name' => 'Admin']);
         $writerRol = Role::create(['name' => 'Writer']);
+
+        $viewPostsPermission = Permission::create(['name' => 'View posts']);
+        $createPostsPermission = Permission::create(['name' => 'Create posts']);
+        $updatePostsPermission = Permission::create(['name' => 'Update posts']);        
+        $deletePostsPermission = Permission::create(['name' => 'Delete posts']);
 
         $user = User::factory(1)->create([
             'name' => 'Joaquin Pereira',
