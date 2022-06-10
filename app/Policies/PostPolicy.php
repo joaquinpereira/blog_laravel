@@ -17,7 +17,7 @@ class PostPolicy
         }
     }
 
-     public function view(User $user, Post $post)
+    public function view(User $user, Post $post)
     {
         return $user->id === $post->user_id || $user->hasPermissionTo('View posts');
     }

@@ -26,8 +26,13 @@ class DatabaseSeeder extends Seeder
 
         $viewPostsPermission = Permission::create(['name' => 'View posts']);
         $createPostsPermission = Permission::create(['name' => 'Create posts']);
-        $updatePostsPermission = Permission::create(['name' => 'Update posts']);        
+        $updatePostsPermission = Permission::create(['name' => 'Update posts']);
         $deletePostsPermission = Permission::create(['name' => 'Delete posts']);
+
+        $viewUsersPermission = Permission::create(['name' => 'View users']);
+        $createUsersPermission = Permission::create(['name' => 'Create users']);
+        $updateUsersPermission = Permission::create(['name' => 'Update users']);
+        $deleteUsersPermission = Permission::create(['name' => 'Delete users']);
 
         $user = User::factory(1)->create([
             'name' => 'Joaquin Pereira',
