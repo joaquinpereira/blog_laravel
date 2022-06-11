@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
     {
         Storage::disk('public')->deleteDirectory('posts');
 
-        $adminRol = Role::create(['name' => 'Admin']);
-        $writerRol = Role::create(['name' => 'Writer']);
+        $adminRol = Role::create(['name' => 'Admin', 'display_name' => "Administrador"]);
+        $writerRol = Role::create(['name' => 'Writer', 'display_name' => "Escritor"]);
 
         $viewPostsPermission = Permission::create(['name' => 'View posts']);
         $createPostsPermission = Permission::create(['name' => 'Create posts']);

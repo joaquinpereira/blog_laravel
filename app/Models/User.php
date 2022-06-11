@@ -65,4 +65,9 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class);
     }
+
+    public function getRoleDisplayNames()
+    {
+        return $this->roles()->pluck('display_name')->implode(', ');
+    }
 }
