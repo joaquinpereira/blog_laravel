@@ -26,7 +26,8 @@ class UsersController extends Controller
         $this->authorize('create', $user);
 
         $roles = Role::with('permissions')->get();
-        $permissions = Permission::pluck('name','id');
+        $permissions = Permission::orderBy('id', 'ASC')->pluck('name','id');
+
         return view('admin.users.create', compact('user','roles','permissions'));
     }
 
@@ -64,7 +65,7 @@ class UsersController extends Controller
         $this->authorize('update',$user);
 
         $roles = Role::with('permissions')->get();
-        $permissions = Permission::pluck('name','id');
+        $permissions = Permission::orderBy('id', 'ASC')->pluck('name','id');
         return view('admin.users.edit', compact('user','roles','permissions'));
     }
 

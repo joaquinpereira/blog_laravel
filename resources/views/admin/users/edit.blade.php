@@ -8,15 +8,9 @@
                     <h3 class="box-title">Datos Personales</h3>
                 </div>
                 <div class="box-body">
-                    @if ($errors->any())
-                        <ul class="list-group">
-                            @foreach ($errors->all() as $error)
-                                <li class="list-group-item list-group-item-danger">
-                                    {{ $error }}
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endif
+
+                    @include('admin.partials.errors-messages')
+                    
                     <form method="POST" action="{{ route('admin.users.update', $user) }}">
                         @csrf
                         @method('PUT')
@@ -85,7 +79,7 @@
                         <form action="{{ route('admin.users.permissions.update', $user) }}" method="post">
                             @csrf @method('PUT')
 
-                            @include('admin.partials.permissions')   
+                            @include('admin.partials.permissions',['model' => $user]) 
 
                             <button class="btn btn-primary btn-block">Actualizar permisos</button>
                         </form>
