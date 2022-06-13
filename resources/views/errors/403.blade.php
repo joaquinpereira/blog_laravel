@@ -4,7 +4,8 @@
     <section class="pages container">
         <div class="page page-contact">
             <h1 class="text-capitalize">Página no autorizada</h1>
-            <p>Regresar al <a href="{{ route('pages.home') }}">Inicio</a></p>
+            <span style="color:red">{{ $exception->getMessage() }}</span>            
+            <p><a href="{{ url()->previous() }}">Regresar</a></p>
         </div>
     </section>
 @endsection
