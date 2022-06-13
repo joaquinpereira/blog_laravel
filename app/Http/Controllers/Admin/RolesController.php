@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SaveRoleRequest;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -24,12 +25,9 @@ class RolesController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(SaveRoleRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|unique:roles',
-            'display_name' => 'required',
-        ]);
+        $data = $request->only('name', 'display_name');
 
         $role = Role::create($data);
 
@@ -51,13 +49,9 @@ class RolesController extends Controller
         ]);
     }
 
-    public function update(Request $request, Role $role)
+    public function update(SaveRoleRequest $request, Role $role)
     {
-        $data = $request->validate([
-            'display_name' => 'required',
-        ]);
-
-        $role->update($data);
+        $role->update($request->only('display_name'));
 
         $role->syncPermissions($request->permissions);
 
