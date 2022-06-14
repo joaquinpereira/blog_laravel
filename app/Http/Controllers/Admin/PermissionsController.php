@@ -11,23 +11,17 @@ class PermissionsController extends Controller
 {
     public function index()
     {
+        $this->authorize('view', new Permission());
+
         return view('admin.permissions.index',[
             'permissions' => Permission::all()
         ]);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function edit(Permission $permission)
     {
+        $this->authorize('update', $permission);
+
         return view('admin.permissions.edit',[
             'permission' => $permission
         ]);
@@ -35,6 +29,8 @@ class PermissionsController extends Controller
 
     public function update(SavePermissionRequest $request, Permission $permission)
     {
+        $this->authorize('update', $permission);
+
         $permission->update($request->only('display_name'));
 
         return redirect()->route('admin.permissions.edit', $permission)->withFlash('El role ha sido actualizado');
