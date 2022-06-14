@@ -20,6 +20,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('posts', 'PostsController', ['except' => 'show', 'as' => 'admin']);
     Route::resource('users', 'UsersController', ['as' => 'admin']);
     Route::resource('roles', 'RolesController', ['except' => 'show', 'as' => 'admin']);
+    Route::resource('permissions', 'PermissionsController', ['only' => ['index', 'edit', 'update'], 'as' => 'admin']);
 
     Route::middleware('role:Admin')->put('users/{user}/roles', 'UsersRolesController@update')->name('admin.users.roles.update');
     Route::middleware('role:Admin')->put('users/{user}/permissions', 'UsersPermissionsController@update')->name('admin.users.permissions.update');
