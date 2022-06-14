@@ -28,7 +28,7 @@
                     </li>
                   </ul>
     
-                  <a href="#" class="btn btn-primary btn-block"><b>Editar</b></a>
+                  <a href="{{ route('admin.users.edit', auth()->user()) }}" class="btn btn-primary btn-block"><b>Editar</b></a>
                 </div>
                 <!-- /.box-body -->
               </div>

@@ -39,6 +39,9 @@ class DatabaseSeeder extends Seeder
         $updateRolesPermission = Permission::create(['name' => 'Update roles', 'display_name' => 'Actualizar roles']);
         $deleteRolesPermission = Permission::create(['name' => 'Delete roles', 'display_name' => 'Elminar roles']);
 
+        $writerRol->givePermissionTo($createPostsPermission);
+        $writerRol->givePermissionTo($updateUsersPermission);        
+
         $user = User::factory(1)->create([
             'name' => 'Joaquin Pereira',
             'email' => 'pereira.joaquin@gmail.com',
