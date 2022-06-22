@@ -47,9 +47,19 @@ class Post extends Model
     }
 
     public function scopePublished($query){
-        return $query->whereNotNull('published_at')
-        ->where('published_at','<=', Carbon::now())
-        ->orderBy('published_at', 'desc');
+        return $query->with(['owner', 'category', 'tags', 'photos'])
+                    ->whereNotNull('published_at')
+                    ->where('published_at','<=', Carbon::now())
+                    ->orderBy('published_at', 'desc');
+    }
+
+    public function scopeByYearAndMonth($query){
+        return $query->selectRaw('year(published_at) as year')
+        ->selectRaw('month(published_at) as month')
+        ->selectRaw('monthname(published_at) as monthname')
+        ->selectRaw('count(*) as posts')
+        ->groupBy('year','month','monthname')
+        ->orderBy('year');
     }
 
     public function scopeAllowed($query){

@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'url' => Str::slug($title),
             'excerpt' => $this->faker->sentence(20 , true),
             'body' => $this->faker->paragraph(30 , true),
-            'published_at' => Carbon::now()->subDays($this->faker->numberBetween($min = 1, $max = 10)),
+            'published_at' => Carbon::now()->subDays($this->faker->numberBetween($min = 1, $max = 200)),
             'category_id' => $this->faker->numberBetween($min = 1, $max = 10),
             'user_id' => $this->faker->numberBetween($min = 1, $max = 2),
         ];

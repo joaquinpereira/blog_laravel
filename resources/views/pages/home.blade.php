@@ -5,7 +5,7 @@
         @if(isset($title))
             <h3>{{ $title }}</h3>
         @endif
-        @foreach ($posts as $post)
+        @forelse ($posts as $post)
             <article class="post">
 
                 @include($post->viewType('home'))
@@ -31,10 +31,16 @@
                     </footer>
                 </div>
             </article>
-        @endforeach
+        @empty
+            <article class="post">
+                <div class="content-post">
+                    <h1>No hay publicaciones todavía.</h1>
+                </div>
+            </article>
+        @endforelse
     </section>
 
-    {{ $posts->links() }}
+    {{ $posts->appends(request()->all())->links() }}
 
 @endsection
 
