@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
+    public function spa(){
+        return view('pages.spa');
+    }
+
     public function home(){
         $query = Post::published();
 
@@ -23,6 +27,10 @@ class PagesController extends Controller
         }
 
         $posts = $query->paginate(15);
+
+        if(request()->wantsJson()){
+            return $posts;
+        }
         
         return view('pages.home', compact('posts'));
     }
@@ -35,14 +43,18 @@ class PagesController extends Controller
 
         DB::statement("SET lc_time_names = 'es_ES'");
 
-        $archive = Post::byYearAndMonth()->get();
-
-        return view('pages.archive',[
+        $data = [
             'authors' => User::latest()->take(4)->get(),
             'categories' => Category::latest()->take(7)->get(),
             'posts' => Post::latest('published_at')->take(7)->get(),
-            'archive' => $archive
-        ]);
+            'archive' => Post::byYearAndMonth()->get()
+        ];
+        
+        if(request()->wantsJson()){
+            return $data;
+        }
+
+        return view('pages.archive', $data);
     }
 
     public function contact(){

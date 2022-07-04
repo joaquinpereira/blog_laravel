@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     public function show(Category $category){
+
+        $posts = $category->posts()->published()->paginate(15);
+        
+        if(request()->wantsJson()){
+            return $posts;
+        }
         
         return view('pages.home',[
-            'posts' => $category->posts()->published()->paginate(15),
+            'posts' => $posts,
             'title' => "Publicaciones de la categoría '$category->name'"
         ]);
     }

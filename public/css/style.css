@@ -233,6 +233,17 @@ a.btn-bar{
     font-size: 19px;
 }
 
+.send-message button{
+	display: block;
+    font-weight: bold;
+    margin-top: 25px;
+    font-size: 19px;
+	border: none;
+	cursor: pointer;
+	padding: 15px 18px;
+	background: none;
+}
+
 .custom-wrapper {
           margin-bottom: 1em;
           -webkit-font-smoothing: antialiased;
@@ -311,4 +322,33 @@ a.btn-bar{
 
 .carousel-inner .item img{
 	width: 100%;
+}
+
+.v-enter-active, .v-leave-active{
+	transition: opacity .5s;
+}
+.v-enter, .v-leave-to{
+	opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active{
+	transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to{
+	opacity: 0;
+}
+
+.slide-fade-enter-active{
+	transition: all .4s ease;
+}
+.slide-fade-leave-active{
+	transition: all .6s cubic-bezier(0.175, 0.67, 0.83, 0.67);
+}
+.slide-fade-enter, .slide-fade-leave-to{
+	transform: translateY(800px);
+	opacity: 0;
+}
+
+.page-wraper{
+	min-height: 100vh
 }

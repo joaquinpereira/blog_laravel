@@ -17,6 +17,8 @@ class Post extends Model
 
     protected $dates = ['published_at'];
 
+    protected $appends = ['published_date'];
+
     public static function boot(){
         parent::boot();
 
@@ -92,6 +94,10 @@ class Post extends Model
         $this->url = $url;
 
         $this->save();
+    }
+
+    public function getPublishedDateAttribute(){
+        return optional($this->published_at)->format('M d');
     }
 
     public function setPublishedAtAttribute($published_at){
