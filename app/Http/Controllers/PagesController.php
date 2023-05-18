@@ -31,7 +31,7 @@ class PagesController extends Controller
         if(request()->wantsJson()){
             return $posts;
         }
-        
+
         return view('pages.home', compact('posts'));
     }
 
@@ -49,7 +49,7 @@ class PagesController extends Controller
             'posts' => Post::latest('published_at')->take(7)->get(),
             'archive' => Post::byYearAndMonth()->get()
         ];
-        
+
         if(request()->wantsJson()){
             return $data;
         }
